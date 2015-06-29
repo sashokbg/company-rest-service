@@ -1,9 +1,11 @@
 package bg.alexander.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -40,11 +43,11 @@ public class Order implements Serializable {
 	@Lob
 	private String comments;
 
-	@Temporal(TemporalType.DATE)
-	private Date orderDate;
+	@Column
+	private LocalDate orderDate;
 
-	@Temporal(TemporalType.DATE)
-	private Date requiredDate;
+	@Column
+	private LocalDate requiredDate;
 
 	@Temporal(TemporalType.DATE)
 	private Date shippedDate;
@@ -52,7 +55,7 @@ public class Order implements Serializable {
 	private String status;
 
 	//uni-directional many-to-one association to Customer
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="customerNumber")
 	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="customerNumber")
 	@JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
@@ -88,19 +91,19 @@ public class Order implements Serializable {
 		this.comments = comments;
 	}
 
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return this.orderDate;
 	}
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 
-	public Date getRequiredDate() {
+	public LocalDate getRequiredDate() {
 		return this.requiredDate;
 	}
 
-	public void setRequiredDate(Date requiredDate) {
+	public void setRequiredDate(LocalDate requiredDate) {
 		this.requiredDate = requiredDate;
 	}
 
