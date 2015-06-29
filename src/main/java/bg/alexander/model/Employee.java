@@ -2,12 +2,14 @@ package bg.alexander.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -34,15 +36,10 @@ public class Employee implements Serializable {
 
 	private String lastName;
 
-	//uni-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="reportsTo")
-	@JsonProperty(value="reportsTo")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="employeeNumber")
-	@JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
-	private Employee employee;
+	private Employee reportsTo;
 
-	//uni-directional many-to-one association to Office
 	@ManyToOne
 	@JoinColumn(name="officeCode")
 	private Office office;
@@ -98,12 +95,12 @@ public class Employee implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public Employee getEmployee() {
-		return this.employee;
+	public Employee getReportsTo() {
+		return this.reportsTo;
 	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setReportsTo(Employee employee) {
+		this.reportsTo = employee;
 	}
 
 	public Office getOffice() {

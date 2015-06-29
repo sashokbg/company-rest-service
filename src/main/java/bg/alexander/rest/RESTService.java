@@ -1,4 +1,4 @@
-package bg.alexander;
+package bg.alexander.rest;
 
 import java.time.LocalDate;
 import java.util.List;

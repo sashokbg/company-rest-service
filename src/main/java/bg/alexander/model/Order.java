@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -19,11 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 /**
@@ -56,9 +50,6 @@ public class Order implements Serializable {
 
 	//uni-directional many-to-one association to Customer
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="customerNumber")
-	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="customerNumber")
-	@JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
 	private Customer customer;
 	
 	@OneToMany(mappedBy="order", fetch=FetchType.EAGER)
