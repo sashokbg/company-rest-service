@@ -1,7 +1,6 @@
 package bg.alexander.converters;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.ws.rs.ext.ParamConverter;
 

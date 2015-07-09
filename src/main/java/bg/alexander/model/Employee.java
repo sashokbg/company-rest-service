@@ -11,6 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import bg.alexander.rest.json.JsonViews;
+
 
 /**
  * The persistent class for the employees database table.
@@ -30,6 +34,7 @@ public class Employee implements Serializable {
 
 	private String extension;
 
+	@JsonView(JsonViews.Short.class)
 	private String firstName;
 
 	private String jobTitle;

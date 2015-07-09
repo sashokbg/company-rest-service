@@ -12,8 +12,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import bg.alexander.model.Employee;
 import bg.alexander.model.Order;
+import bg.alexander.rest.json.JsonViews;
 import bg.alexander.service.OrdersService;
 
 @Path("/")
@@ -34,6 +37,7 @@ public class RESTService {
 	}
 
 	@GET
+	@JsonView(JsonViews.Short.class)
 	@Produces("application/json")
 	@Path("/order/{id}")
 	public Order getOrders(@PathParam("id") int id) {
