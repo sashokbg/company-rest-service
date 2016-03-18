@@ -61,6 +61,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -73,6 +78,21 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<!-- Database init plugin -->
+			<plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/classicmodels</url>
+                    <user>root</user>
+                    <password>toor</password>
+                    <locations>
+                    	<location>filesystem:src/main/resources/db</location>
+                    </locations>
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>
