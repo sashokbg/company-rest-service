@@ -12,11 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import bg.alexander.rest.json.JsonViews;
 
@@ -42,17 +42,22 @@ public class Employee implements Serializable {
 	@JsonView(JsonViews.Short.class)
 	private String firstName;
 
+	private String lastName;
+	
 	private String jobTitle;
 
-	private String lastName;
-
+	@JsonGetter("reportsTo")
+	private ObjectNode getIdAsJson(){
+		final JsonNodeFactory factory = JsonNodeFactory.instance;
+		return factory.objectNode()
+			.put("id",reportsTo.getEmployeeNumber())
+			.put("firstName", reportsTo.getFirstName())
+			.put("lastName", reportsTo.getLastName());
+	}
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="reportsTo")
-	@JsonIdentityInfo(
-			generator=ObjectIdGenerators.PropertyGenerator.class,
-			property="lastName"
-			)
-	@JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
+	@JsonIgnore
 	private Employee reportsTo;
 
 	@ManyToOne
