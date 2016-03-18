@@ -3,6 +3,7 @@ package bg.alexander.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import bg.alexander.rest.json.JsonViews;
 
@@ -41,8 +46,13 @@ public class Employee implements Serializable {
 
 	private String lastName;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="reportsTo")
+	@JsonIdentityInfo(
+			generator=ObjectIdGenerators.PropertyGenerator.class,
+			property="lastName"
+			)
+	@JsonIdentityReference(alwaysAsId=true) // otherwise first ref as POJO, others as id
 	private Employee reportsTo;
 
 	@ManyToOne
