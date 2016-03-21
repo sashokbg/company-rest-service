@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * 
  */
 @Entity
-@Table(name="orderDetails")
+@Table(name="orderdetails")
 @NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
 public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
