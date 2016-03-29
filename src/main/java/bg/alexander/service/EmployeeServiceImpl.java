@@ -17,4 +17,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return em.find(Employee.class, id);
 	}
 
+	@Override
+	public boolean addEmployee(Employee e) {
+		em.persist(e);
+		return true;
+	}
 }

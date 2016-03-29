@@ -26,6 +26,4 @@ public class OrdersServiceImpl implements OrdersService,Serializable{
 		
 		return ordersBefore;
 	}
-
-	
 }
