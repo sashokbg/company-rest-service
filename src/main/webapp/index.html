@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<script src="https://code.jquery.com/jquery-1.12.2.js"></script>
+</head>
+
+<body>
+	Add employee
+	<div>
+		<form method="POST" action="rest/user/add">
+			First Name
+			<input type="text" name="firstName" id="firstName">
+			Last Name
+			<input type="text" name="lastName" id="lastName">
+		</form>
+		<button onclick="doAjax()">Add user</button>
+		<script type="text/javascript">
+			function doAjax(){
+				
+				var JSONObject = {"firstName": $('#firstName').val(), "lastName": $('#lastName').val() };
+				var jsonData = JSON.stringify( JSONObject );  
+				
+				$.ajax({
+					url: "rest/user/add",
+					method: "POST",
+					contentType: "application/json",
+					dataType: "json",
+					data: jsonData
+				}).done(function(result){
+					alert("Added");
+				});
+			}
+		</script>
+	</div>
+</body>
+
+</html>
