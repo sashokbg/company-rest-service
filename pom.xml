@@ -83,7 +83,7 @@
 					<user>root</user>
 					<password>toor</password>
 					<locations>
-						<location>filesystem:src/main/resources/db</location>
+						<location>filesystem:src/main/resources/db/migration</location>
 					</locations>
 					<baselineOnMigrate>true</baselineOnMigrate>
 				</configuration>
