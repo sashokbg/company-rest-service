@@ -10,7 +10,8 @@ Version 2.0
 + changed table type to InnoDB
 + added foreign keys for all tables 
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -29,7 +30,7 @@ USE `classicmodels`;
 DROP TABLE IF EXISTS `customers`;
 
 CREATE TABLE `customers` (
-  `customerNumber` int(11) NOT NULL,
+  `customerNumber` int(11) NOT NULL AUTO_INCREMENT,
   `customerName` varchar(50) NOT NULL,
   `contactLastName` varchar(50) NOT NULL,
   `contactFirstName` varchar(50) NOT NULL,
@@ -60,7 +61,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `employees`;
 
 CREATE TABLE `employees` (
-  `employeeNumber` int(11) NOT NULL,
+  `employeeNumber` int(11) NOT NULL AUTO_INCREMENT,
   `lastName` varchar(50) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `extension` varchar(10) NOT NULL,
@@ -88,7 +89,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `offices`;
 
 CREATE TABLE `offices` (
-  `officeCode` varchar(10) NOT NULL,
+  `officeCode` varchar(10) NOT NULL AUTO_INCREMENT,
   `city` varchar(50) NOT NULL,
   `phone` varchar(50) NOT NULL,
   `addressLine1` varchar(50) NOT NULL,
@@ -113,7 +114,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `orderdetails`;
 
 CREATE TABLE `orderdetails` (
-  `orderNumber` int(11) NOT NULL,
+  `orderNumber` int(11) NOT NULL AUTO_INCREMENT,
   `productCode` varchar(15) NOT NULL,
   `quantityOrdered` int(11) NOT NULL,
   `priceEach` double NOT NULL,
@@ -137,7 +138,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `orders`;
 
 CREATE TABLE `orders` (
-  `orderNumber` int(11) NOT NULL,
+  `orderNumber` int(11) NOT NULL AUTO_INCREMENT,
   `orderDate` date NOT NULL,
   `requiredDate` date NOT NULL,
   `shippedDate` date DEFAULT NULL,
@@ -183,7 +184,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `productlines`;
 
 CREATE TABLE `productlines` (
-  `productLine` varchar(50) NOT NULL,
+  `productLine` varchar(50) NOT NULL AUTO_INCREMENT,
   `textDescription` varchar(4000) DEFAULT NULL,
   `htmlDescription` mediumtext,
   `image` mediumblob,
@@ -203,7 +204,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `products`;
 
 CREATE TABLE `products` (
-  `productCode` varchar(15) NOT NULL,
+  `productCode` varchar(15) NOT NULL AUTO_INCREMENT,
   `productName` varchar(70) NOT NULL,
   `productLine` varchar(50) NOT NULL,
   `productScale` varchar(10) NOT NULL,
